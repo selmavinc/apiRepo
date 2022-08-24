@@ -27,79 +27,90 @@ namespace WebApplication2022.Controllers
         {
             return dept;
         }
-        //// GET: departmentController
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
-        //// GET: departmentController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
+        public static List<Student> student = new List<Student>();
+        [HttpPost]
+        [Route("Add Student")]
+        public IActionResult addStudent(int id, int deptId, string Name, int age)
+        {
+            bool isExists = dept.Contains(dept.Find(de => de.deptID == deptId));
+            if (!isExists)
+            {
+                return BadRequest("Department not found");
+            }
+            try
+            {
 
-        //// GET: departmentController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+                student.Add(new Student
+                {
+                    studId = id,
+                    deptId = deptId,
+                    studName = Name,
+                    studAge = age
+                });
+                return Ok("Student Added successfully");
 
-        //// POST: departmentController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
-        //// GET: departmentController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Not exists");
+            }
 
-        //// POST: departmentController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        }
 
-        //// GET: departmentController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        [Route("View Students")]
+        public IEnumerable<Student> getstudent()
+        {
+            return student;
+        }
 
-        //// POST: departmentController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        [HttpPut]
+        [Route("Update Student")]
+        public IActionResult updateStudent(int deptId, string Name, int age)
+        {
+            bool isExists = dept.Contains(dept.Find(de => de.deptID == deptId));
+            if (!isExists)
+            {
+                return BadRequest("Department not found");
+            }
+            try
+            {
+
+                student.Find(stud => stud.deptId == deptId).studName = Name;
+                student.Find(stud => stud.deptId == deptId).studAge = age;
+                return Ok("Modified successfully");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Not exists");
+            }
+
+        }
+
+        [HttpDelete]
+        [Route("Delete Student")]
+        public IActionResult deleteStudent(int deptId)
+        {
+            bool isExists = dept.Contains(dept.Find(de => de.deptID == deptId));
+            if (!isExists)
+            {
+                return BadRequest("Department not found");
+            }
+            try
+            {
+
+                student.Remove(student.Find(stud => stud.deptId == deptId));
+                return Ok("Removed successfully");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Not exists");
+            }
+
+        }
     }
 }

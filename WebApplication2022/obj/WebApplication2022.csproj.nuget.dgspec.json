@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Practice\\WebApplication2022\\WebApplication2022.csproj": {}
+    "D:\\Training\\apiRepo\\WebApplication2022\\WebApplication2022.csproj": {}
   },
   "projects": {
-    "C:\\Practice\\WebApplication2022\\WebApplication2022.csproj": {
+    "D:\\Training\\apiRepo\\WebApplication2022\\WebApplication2022.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Practice\\WebApplication2022\\WebApplication2022.csproj",
+        "projectUniqueName": "D:\\Training\\apiRepo\\WebApplication2022\\WebApplication2022.csproj",
         "projectName": "WebApplication2022",
-        "projectPath": "C:\\Practice\\WebApplication2022\\WebApplication2022.csproj",
+        "projectPath": "D:\\Training\\apiRepo\\WebApplication2022\\WebApplication2022.csproj",
         "packagesPath": "C:\\Users\\cogdotnet1686\\.nuget\\packages\\",
-        "outputPath": "C:\\Practice\\WebApplication2022\\obj\\",
+        "outputPath": "D:\\Training\\apiRepo\\WebApplication2022\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
