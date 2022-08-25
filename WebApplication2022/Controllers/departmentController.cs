@@ -68,18 +68,29 @@ namespace WebApplication2022.Controllers
 
         [HttpPut]
         [Route("Update Student")]
-        public IActionResult updateStudent(int deptId, string Name, int age)
+        public IActionResult updateStudent(int studId, int deptId, string Name, int age)
         {
-            bool isExists = dept.Contains(dept.Find(de => de.deptID == deptId));
-            if (!isExists)
+            bool isdeptExists = dept.Contains(dept.Find(de => de.deptID == deptId));
+            bool isStudExists = student.Contains(student.Find(stud => stud.studId == studId));
+            bool isExists = student.Contains(student.Find(stud => stud.deptId == deptId && stud.studId == studId));
+            if (!isStudExists)
+            {
+                return BadRequest("Student not found");
+            }
+            if (!isdeptExists)
             {
                 return BadRequest("Department not found");
             }
+            if (!isExists)
+            {
+                return BadRequest("No Data found");
+            }
+
             try
             {
-
-                student.Find(stud => stud.deptId == deptId).studName = Name;
-                student.Find(stud => stud.deptId == deptId).studAge = age;
+                student.Find(stud => stud.deptId == deptId && stud.studId == studId).deptId = deptId;
+                student.Find(stud => stud.studId == studId && stud.deptId == deptId).studName = Name;
+                student.Find(stud => stud.studId == studId && stud.deptId == deptId ).studAge = age;
                 return Ok("Modified successfully");
 
             }
@@ -92,17 +103,28 @@ namespace WebApplication2022.Controllers
 
         [HttpDelete]
         [Route("Delete Student")]
-        public IActionResult deleteStudent(int deptId)
+        public IActionResult deleteStudent(int studId, int deptId)
         {
-            bool isExists = dept.Contains(dept.Find(de => de.deptID == deptId));
-            if (!isExists)
+            bool isdeptExists = dept.Contains(dept.Find(de => de.deptID == deptId));
+            bool isStudExists = student.Contains(student.Find(stud => stud.studId == studId));
+            bool isExists = student.Contains(student.Find(stud => stud.deptId == deptId && stud.studId == studId));
+            if (!isStudExists)
+            {
+                return BadRequest("Student not found");
+            }
+            if (!isdeptExists)
             {
                 return BadRequest("Department not found");
             }
+            if (!isExists)
+            {
+                return BadRequest("No Data found");
+            }
+
             try
             {
 
-                student.Remove(student.Find(stud => stud.deptId == deptId));
+                student.Remove(student.Find(stud => stud.deptId == deptId && stud.studId == studId));
                 return Ok("Removed successfully");
 
             }
