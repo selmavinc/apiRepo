@@ -21,6 +21,7 @@ namespace WebApplication2022.Controllers
             return Ok("Department Added successfully");
         }
 
+        [Produces("application/xml")]
         [HttpGet]
         [Route("View Departments")]
         public IEnumerable<Department> getDept()
